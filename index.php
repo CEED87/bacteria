@@ -1,67 +1,85 @@
-
-
-    <!doctype html>
-    <html lang="en">
+<!doctype html>
+<html lang="en">
     <head>
-    <meta charset="UTF-8">
-    <title>Авторизация и регистрация</title>
-    <link rel="stylesheet" href="style.css">
+        <meta charset="UTF-8">
+        <title>Авторизация и регистрация</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
 
-    <form id="register" action="/" method="GET">
-        <label>Имя</label>
-        <input type="text" name="name" placeholder="Enter your login">
-        <span></span>
-        <label>Номер телефона</label>
-        <input type="tel" name="phone" placeholder="Enter password">
-        <span></span>
-        <label>Почта</label>
-        <input type="email" name="email" placeholder="Confirm the password">
-        <span></span>
-        <label>Число тактов времени</label>
-        <input type="number" name="count" placeholder="Enter your email address">
-        <span></span>
-        <button type="submit">Отправить</button>
-       
-        <p id="mess"></p>
-    </form>
+        <?php
 
-    <?php
-        // print_r($_GET);
+            $dataForm = $_GET;
+            $mess = '';
+            $bacteria = 'Enter the data';
 
-        $dataForm = $_GET;
-        // print_r($dataForm);
-        foreach($dataForm as $value => $key) {
-            // if(!preg_match("/^[a-zA-Z][a-zA-Z0-9-_\.]{5,20}$/",$value)) {
-            // // echo $value . "<br>";
-            // echo "No valid";
-            // }else 
-            // echo $value . "<br>";
-            // echo $value .' '. $key . "<br>";
+            function bacteria($count) {
+                $greenBacteria = 1;
+                $redBacteria = 1;
 
-            if ($value === 'name' and preg_match("/^[a-zA-Zа-яА-Я]/",$key)) {
-                echo $key . "<br>";
+                for ($i = 1; $i <= $count; $i++) {
+                    $green_green = $greenBacteria * 3;
+                    $green_red = $greenBacteria * 4;
+
+                    $red_green = $redBacteria * 7;
+                    $red_red = $redBacteria * 5;
+
+                    $greenBacteria = $green_green + $red_green;
+                    $redBacteria = $green_red + $red_red;
+                }
+
+                return 'Зеленых бактерий: '. $greenBacteria . ' ' . 'Красных бактерий: ' . $redBacteria;
             }
-            if ($value === 'phone' and preg_match("/^[+][0-9]/",$key)) {
-                echo $key . "<br>";
+
+            foreach($dataForm as $value => $key) {
+            
+                if ($value === 'name' and !preg_match("/^[a-zA-Zа-яА-Я]/",$key)) 
+                {
+                    $mess = 'Not valid name';
+                }  
+                elseif ($value === 'phone' and !preg_match("/^[+][0-9]/",$key)) 
+                {
+                    $mess = 'Not valid phone';
+                }
+                elseif ($value === 'email' and !preg_match("/.+@.+\..+/i",$key)) 
+                {
+                    $mess = 'Not valid email';
+                }
+              else $bacteria = bacteria($_GET['count']);
+                // else $bacteria = $_GET['count'];
             }
-        }
-
-//         $website = input($_POST["site"]);
-
-// if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
-//    $websiteErr = "Invalid URL"; 
-// }
-
-
     ?>
+        <form id="register" action="/" method="GET">
+            <label>Имя</label>
+            <input type="text" name="name" placeholder="Введите имя">
+            <span></span>
+            <label>Номер телефона</label>
+            <input type="tel" name="phone" placeholder="Введите номер телефона">
+            <span></span>
+            <label>Почта</label>
+            <input type="email" name="email" placeholder="Введите этектронную почту">
+            <span></span>
+            <label>Число тактов времени</label>
+            <input type="number" name="count" placeholder="Введите число тактов">
+            <span></span>
+            <button type="submit">Отправить</button>
+
+            <?php
+            if ($mess !== '') {
+                echo "<p class='userN'> $mess </p>";
+            } else 
+                echo "<p class='userY'> $bacteria </p>";
+            ?>
+        
+        </form>
+
+
 
     <script src="/scripts/main.js"></script>
     <script src="/scripts/registration.js"></script>
     
     </body>
-    </html>
+</html>
 
 
 
