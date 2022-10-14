@@ -2,8 +2,52 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Авторизация и регистрация</title>
-        <link rel="stylesheet" href="style.css">
+        <title>Счётчик бактерий</title>
+        <style>
+            body {
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: Montserrat, sans-serif;
+            }
+            form {
+                display: flex;
+                flex-direction: column;
+                width: 400px;
+            }
+
+            input {
+                margin: 10px 0;
+                padding: 10px;
+                border: unset;
+                border-bottom: 2px solid #e3e3e3;
+                outline: none;
+            }
+
+            button {
+                padding: 10px;
+                background: #e3e3e3;
+                border: unset;
+                cursor: pointer;
+            }
+            .userY {
+                border: 2px solid #8cff08;
+                border-radius: 3px;
+                padding: 10px;
+                color: rgb(0, 128, 34);
+                text-align: center;
+                font-weight: bold;
+            }
+            .userN {
+                border: 2px solid #fa3b3b;
+                border-radius: 3px;
+                padding: 10px;
+                color: rgb(163, 0, 0);
+                text-align: center;
+                font-weight: bold;
+            }
+        </style>
     </head>
     <body>
 
@@ -11,7 +55,7 @@
 
             $dataForm = $_GET;
             $mess = '';
-            $bacteria = 'Enter the data';
+            $bacteria = 'Введите данные';
 
             function bacteria($count) {
                 $greenBacteria = 1;
@@ -35,18 +79,17 @@
             
                 if ($value === 'name' and !preg_match("/^[a-zA-Zа-яА-Я]/",$key)) 
                 {
-                    $mess = 'Not valid name';
+                    $mess = 'Недопустимое имя';
                 }  
                 elseif ($value === 'phone' and !preg_match("/^[+][0-9]/",$key)) 
                 {
-                    $mess = 'Not valid phone';
+                    $mess = 'Недопустимый номер телефона';
                 }
                 elseif ($value === 'email' and !preg_match("/.+@.+\..+/i",$key)) 
                 {
-                    $mess = 'Not valid email';
+                    $mess = 'Недопустимое email';
                 }
               else $bacteria = bacteria($_GET['count']);
-                // else $bacteria = $_GET['count'];
             }
     ?>
         <form id="register" action="/" method="GET">
@@ -71,13 +114,7 @@
                 echo "<p class='userY'> $bacteria </p>";
             ?>
         
-        </form>
-
-
-
-    <script src="/scripts/main.js"></script>
-    <script src="/scripts/registration.js"></script>
-    
+        </form> 
     </body>
 </html>
 
